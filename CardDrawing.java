@@ -10,6 +10,6 @@ public abstract class CardDrawing
 			throw new IllegalArgumentException();
 		}
 		Random random = new Random();
-		return random.next(max);
+		return random.nextInt(max);
 	}
 }
