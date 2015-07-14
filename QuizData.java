@@ -37,8 +37,8 @@ public class QuizData
 
 	public void drawNext()
 	{
-		int index = cardDrawing.getNextVocabId(sizeVocab());
-		System.out.println("Please translate: " + vocabMap.get(index).getVocable());
+		current = cardDrawing.getNextVocabId(sizeVocab());
+		System.out.println("Please translate: " + vocabMap.get(current).getVocable());
 	}
 
 	public VocabCard getCurrentVocabCard()

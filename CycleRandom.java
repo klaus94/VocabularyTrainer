@@ -6,10 +6,16 @@ public class CycleRandom extends CardDrawing
 
 	public int getNextVocabId(int sizeVocab)
 	{
-		if (cycleList == null || cycleList.size() == 0) {
+		if (cycleList == null) {
 			initializeCycleList(sizeVocab);
 		}
-		return removeRandomFromCycleList();
+
+		int solution = removeRandomFromCycleList();
+
+		if (cycleList.size() == 0) {
+			initializeCycleList(sizeVocab);
+		}
+		return solution;
 	}
 
 	private void initializeCycleList(int sizeVocab)
