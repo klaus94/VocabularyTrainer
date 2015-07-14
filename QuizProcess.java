@@ -35,8 +35,6 @@ public class QuizProcess
 
 		// initialize state
 		currentState = setState(new StartState());
-
-		// TODO: updateUI();
 	}
 
 	private void updateUI()
@@ -137,17 +135,18 @@ public class QuizProcess
 
 			public void updateUI()
 			{
-				// check, if translation is correct, if correct: print "Correct!" else "Wrong!"
-				if (getCurrentVocabCard().getTranslation().equals( in.next() ))
+				private VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.next());
+				
+				if (vc.equals(getCurrentVocabCard()))
 				{
-					System.out.println("Correct!");
+					out.println("Correct!");
 				}
 				else
 				{
-					System.out.println("Wrong!");
+					out.println("Wrong!");
 
 					// optional output:
-					System.out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
+					out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
 				}
 			}
 
