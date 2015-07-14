@@ -137,6 +137,10 @@ public class QuizProcess
 
 		public void updateUI()
 		{
+			if (getCurrentVocabCard() == null)
+			{
+				System.out.println("test fail");
+			}
 			VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.nextLine());
 
 			if (vc.equals(getCurrentVocabCard()))
