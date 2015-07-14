@@ -43,11 +43,6 @@ public class QuizData
 
 	public VocabCard getCurrentVocabCard()
 	{
-		System.out.println(current);
-		// if (vocabMap.get(current) == null)
-		// {
-		// 	System.out.println("error!!!");
-		// }
 		return vocabMap.get(current);
 	}
 

@@ -37,6 +37,9 @@ public class QuizProcess
 
 		// initialize state
 		setState(new StartState());
+
+		// actions:
+		updateUI();
 	}
 
 	private void updateUI()
@@ -109,7 +112,7 @@ public class QuizProcess
 
 			// actions:
 			drawNext();
-			updateUI();
+			currentState.updateUI();
 		}
 	}
 
@@ -118,7 +121,7 @@ public class QuizProcess
 		public void updateUI()
 		{
 			// action:
-			drawNext();
+			//drawNext();
 		}
 
 		public void input()
@@ -127,7 +130,7 @@ public class QuizProcess
 			setState(new SolutionState());
 
 			// actions:
-			updateUI();
+			currentState.updateUI();
 		}
 	}
 
@@ -137,10 +140,6 @@ public class QuizProcess
 
 		public void updateUI()
 		{
-			if (getCurrentVocabCard() == null)
-			{
-				System.out.println("test fail");
-			}
 			VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.nextLine());
 
 			if (vc.equals(getCurrentVocabCard()))
@@ -163,7 +162,7 @@ public class QuizProcess
 
 			// actions:
 			drawNext();
-			updateUI();
+			currentState.updateUI();
 		}
 
 		public void setSolution(String solution)
