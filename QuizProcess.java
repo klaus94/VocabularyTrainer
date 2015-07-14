@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.PrintStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class QuizProcess
 {
@@ -34,7 +36,7 @@ public class QuizProcess
 		this.data = data;
 
 		// initialize state
-		currentState = setState(new StartState());
+		setState(new StartState());
 	}
 
 	private void updateUI()
@@ -91,91 +93,90 @@ public class QuizProcess
 		{
 			throw new IllegalStateException();
 		}
-
-
-		private class StartState extends State
-		{
-			public void updateUI() 
-			{
-				System.out.println("Hallöle. Du willst also Englisch lernen... Zeitverschwendung. Aber du kannst es ja mal versuchen.");
-			}
-
-			public void update()
-			{
-				// switch state:
-				currentState = setState(new AskingState());
-
-				// actions:
-				drawNext();
-				updateUI();
-			}
-		}
-
-		private class AskingState extends State
-		{
-			public void updateUI()
-			{
-				// action:
-				drawNext();
-			}
-
-			public void input()
-			{
-				// switch state:
-				currentState = setState(new SolutionState());
-
-				// actions:
-				updateUI();
-			}
-		}
-
-		private class SolutionState extends State
-		{
-			private String solution;
-
-			public void updateUI()
-			{
-				private VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.next());
-				
-				if (vc.equals(getCurrentVocabCard()))
-				{
-					out.println("Correct!");
-				}
-				else
-				{
-					out.println("Wrong!");
-
-					// optional output:
-					out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
-				}
-			}
-
-			public void update()
-			{
-				// switch state:
-				currentState = setState(new AskingState());
-
-				// actions:
-				drawNext();
-				updateUI();
-			}
-
-			public void setSolution(String solution)
-			{
-				if (solution == null)
-				{
-					throw new NullPointerException();
-				}
-
-				if (solution.equals(""))
-				{
-					throw new IllegalArgumentException();
-				}
-
-				this.solution = solution;
-			}
-		}
-
 	}
+
+	private class StartState extends State
+	{
+		public void updateUI() 
+		{
+			System.out.println("Hallöle. Du willst also Englisch lernen... Zeitverschwendung. Aber du kannst es ja mal versuchen.");
+		}
+
+		public void update()
+		{
+			// switch state:
+			setState(new AskingState());
+
+			// actions:
+			drawNext();
+			updateUI();
+		}
+	}
+
+	private class AskingState extends State
+	{
+		public void updateUI()
+		{
+			// action:
+			drawNext();
+		}
+
+		public void input()
+		{
+			// switch state:
+			setState(new SolutionState());
+
+			// actions:
+			updateUI();
+		}
+	}
+
+	private class SolutionState extends State
+	{
+		private String solution;
+
+		public void updateUI()
+		{
+			VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.nextLine());
+
+			if (vc.equals(getCurrentVocabCard()))
+			{
+				out.println("Correct!");
+			}
+			else
+			{
+				out.println("Wrong!");
+
+				// optional output:
+				out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
+			}
+		}
+
+		public void update()
+		{
+			// switch state:
+			setState(new AskingState());
+
+			// actions:
+			drawNext();
+			updateUI();
+		}
+
+		public void setSolution(String solution)
+		{
+			if (solution == null)
+			{
+				throw new NullPointerException();
+			}
+
+			if (solution.equals(""))
+			{
+				throw new IllegalArgumentException();
+			}
+
+			this.solution = solution;
+		}
+	}
+
 
 }
