@@ -35,10 +35,8 @@ public class QuizProcess
 
 		this.data = data;
 
-		// initialize state
 		setState(new StartState());
 
-		// actions:
 		updateUI();
 	}
 
@@ -53,12 +51,12 @@ public class QuizProcess
 	}
 
 	public void input()
-	{																								// ??????????????
+	{																							
 		currentState.input();
 	}
 
 	private void setSolution(String solution)										
-	{																								// ??????????????
+	{																								
 		currentState.setSolution(solution);
 	}
 
@@ -107,10 +105,8 @@ public class QuizProcess
 
 		public void update()
 		{
-			// switch state:
 			setState(new AskingState());
 
-			// actions:
 			drawNext();
 			currentState.updateUI();
 		}
@@ -120,16 +116,12 @@ public class QuizProcess
 	{
 		public void updateUI()
 		{
-			// action:
-			//drawNext();
 		}
 
 		public void input()
 		{
-			// switch state:
 			setState(new SolutionState());
 
-			// actions:
 			currentState.updateUI();
 		}
 	}
@@ -140,7 +132,8 @@ public class QuizProcess
 
 		public void updateUI()
 		{
-			VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.nextLine());
+			VocabCard vc = new VocabCard(getCurrentVocabCard().getVocable(), in.nextLine());			// ERROR, weil 'in' Probleme macht
+																										// wie greift man auf die Daten über den Scanner 'in' zu ???
 
 			if (vc.equals(getCurrentVocabCard()))
 			{
@@ -150,7 +143,6 @@ public class QuizProcess
 			{
 				out.println("Wrong!");
 
-				// optional output:
 				out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
 			}
 		}
