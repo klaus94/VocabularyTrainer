@@ -4,7 +4,7 @@ public class CycleRandom extends CardDrawing
 {
 	private List<Integer> cycleList;
 
-	public int getNextVocabId(int sizeVocab)
+	public int getNextVocabCardId(int sizeVocab)
 	{
 		if (cycleList == null) {
 			initializeCycleList(sizeVocab);

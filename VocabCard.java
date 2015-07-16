@@ -31,10 +31,10 @@ public class VocabCard
 	public boolean equals(Object o)
 	{
 		if (o == null) {
-			throw new NullPointerException();
+			return false;
 		}
 
-		if (((VocabCard) o).getVocable().equals(vocable) && ((VocabCard) o).getTranslation().equals(translation)) {
+		if (o instanceof VocabCard && ((VocabCard) o).getVocable().equals(vocable) && ((VocabCard) o).getTranslation().equals(translation)) {
 			return true;
 		}
 

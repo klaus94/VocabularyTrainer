@@ -16,6 +16,11 @@ public class QuizData
 			throw new IllegalArgumentException();
 		}
 
+		if (vocabMap.keySet().contains(null))
+		{
+			throw new IllegalArgumentException();
+		}
+
 		for (Integer i : vocabMap.keySet()) {
 			if (i <= 0 || vocabMap.get(i) == null || i > vocabMap.size()) {
 				throw new IllegalArgumentException();
@@ -37,7 +42,7 @@ public class QuizData
 
 	public void drawNext()
 	{
-		current = cardDrawing.getNextVocabId(sizeVocab());
+		current = cardDrawing.getNextVocabCardId(sizeVocab());
 		System.out.println("Please translate: " + vocabMap.get(current).getVocable());
 	}
 

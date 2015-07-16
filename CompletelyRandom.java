@@ -1,7 +1,12 @@
 public class CompletelyRandom extends CardDrawing
 {
-	public int getNextVocabId(int sizeVocab)
+	public int getNextVocabCardId(int sizeVocab)
 	{
-		return random(sizeVocab + 1);
+		if (sizeVocab < 1)
+		{
+			throw new IllegalArgumentException();
+		}
+
+		return random(sizeVocab) + 1;
 	}
 }

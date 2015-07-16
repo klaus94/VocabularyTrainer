@@ -2,7 +2,7 @@ import java.util.Random;
 
 public abstract class CardDrawing
 {
-	public abstract int getNextVocabId(int sizeVocab);
+	public abstract int getNextVocabCardId(int sizeVocab);
 	
 	public int random(int max)
 	{

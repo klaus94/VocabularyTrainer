@@ -33,6 +33,11 @@ public class QuizProcess
 			throw new NullPointerException();
 		}
 
+		if (currentState instanceof StartState || currentState instanceof AskingState || currentState instanceof SolutionState)
+		{
+			throw new IllegalStateException();
+		}
+
 		this.data = data;
 
 		setState(new StartState());
@@ -47,12 +52,27 @@ public class QuizProcess
 
 	public void update()
 	{
-		currentState.update();
+		if (currentState instanceof StartState || currentState instanceof SolutionState)
+		{
+			currentState.update();
+		}
+		else
+		{
+			throw new IllegalStateException();			// if currentState instance of AskingState or InitialState
+		}
 	}
 
 	public void input()
-	{																							
-		currentState.input();
+	{			
+		if (currentState instanceof AskingState)	// just AskingState is allowed to handle input()
+		{
+			currentState.input();
+		}
+		else
+		{
+			throw new IllegalStateException();
+		}																		
+		
 	}
 
 	private void setSolution(String solution)										
@@ -100,7 +120,7 @@ public class QuizProcess
 	{
 		public void updateUI() 
 		{
-			System.out.println("Hallöle. Du willst also Englisch lernen... Zeitverschwendung. Aber du kannst es ja mal versuchen.");
+			out.println("Hallöle. Du willst also Englisch lernen... Zeitverschwendung. Aber du kannst es ja mal versuchen.");
 		}
 
 		public void update()
@@ -116,6 +136,7 @@ public class QuizProcess
 	{
 		public void updateUI()
 		{
+			out.println("Please translate: " + data.getCurrentVocabCard().getVocable());
 		}
 
 		public void input()
@@ -143,7 +164,7 @@ public class QuizProcess
 			{
 				out.println("Wrong!");
 
-				out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
+				//out.println("The correct answer would have been: " + getCurrentVocabCard().getTranslation());
 			}
 		}
 
